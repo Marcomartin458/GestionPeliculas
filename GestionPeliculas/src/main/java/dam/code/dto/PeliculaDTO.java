@@ -1,5 +1,7 @@
 package dam.code.dto;
 
+import dam.code.models.Pelicula;
+
 import java.time.LocalDate;
 
 public class PeliculaDTO {
@@ -7,14 +9,14 @@ public class PeliculaDTO {
     private String nombre;
     private String director;
     private double duracion;
-    private String fechaPublicacion;
+    private LocalDate fechaPublicacion;
 
     public PeliculaDTO(String id, String nombre, String director, double duracion, LocalDate fechaPublicacion) {
         this.id = id;
         this.nombre = nombre;
         this.director = director;
         this.duracion = duracion;
-        this.fechaPublicacion = fechaPublicacion.toString();
+        this.fechaPublicacion = fechaPublicacion;
     }
 
     public String getId() {
@@ -33,7 +35,21 @@ public class PeliculaDTO {
         return duracion;
     }
 
-    public String getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        PeliculaDTO p = (PeliculaDTO) obj;
+        return this.id != null ? this.id.equals(p.id) : p.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

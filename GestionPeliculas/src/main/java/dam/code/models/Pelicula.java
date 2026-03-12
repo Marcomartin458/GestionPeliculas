@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Pelicula {
     private StringProperty id;
@@ -36,8 +37,8 @@ public class Pelicula {
     public Double getDuracion() {
         return this.duracion.get();
     }
-    public String getFechaPublicacion() {
-        return this.fechaPublicacion.get();
+    public LocalDate getFechaPublicacion() {
+        return LocalDate.parse(this.fechaPublicacion.get(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     //Getters Properties
@@ -64,6 +65,7 @@ public class Pelicula {
         this.fechaPublicacion.set(fechaPublicacion);
     }
 
+
     public PeliculaDTO toDTO() {
         return new PeliculaDTO(
                 getId(),
@@ -74,7 +76,7 @@ public class Pelicula {
         );
     }
 
-    public PeliculaDTO fromDTO(PeliculaDTO dto) {
+    public static Pelicula fromDTO(PeliculaDTO dto) {
         return new Pelicula(
                 dto.getId(),
                 dto.getNombre(),
