@@ -8,10 +8,10 @@ public class PeliculaDTO {
     private String id;
     private String nombre;
     private String director;
-    private double duracion;
+    private Integer duracion;
     private LocalDate fechaPublicacion;
 
-    public PeliculaDTO(String id, String nombre, String director, double duracion, LocalDate fechaPublicacion) {
+    public PeliculaDTO(String id, String nombre, String director, Integer duracion, LocalDate fechaPublicacion) {
         this.id = id;
         this.nombre = nombre;
         this.director = director;
@@ -31,7 +31,7 @@ public class PeliculaDTO {
         return director;
     }
 
-    public double getDuracion() {
+    public Integer getDuracion() {
         return duracion;
     }
 

@@ -1,10 +1,7 @@
 package dam.code.models;
 
 import dam.code.dto.PeliculaDTO;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,15 +11,15 @@ public class Pelicula {
     private StringProperty id;
     private StringProperty nombre;
     private StringProperty director;
-    private DoubleProperty duracion;
-    private StringProperty fechaPublicacion;
+    private IntegerProperty duracion;
+    private ObjectProperty<LocalDate> fechaPublicacion;
 
-    public Pelicula(String id, String nombre, String director, Double duracion, LocalDate fechaPublicacion) {
+    public Pelicula(String id, String nombre, String director, int duracion, LocalDate fechaPublicacion) {
         this.id = new SimpleStringProperty(id);
         this.nombre = new SimpleStringProperty(nombre);
         this.director = new SimpleStringProperty(director);
-        this.duracion = new SimpleDoubleProperty(duracion);
-        this.fechaPublicacion = new SimpleStringProperty(fechaPublicacion.toString());
+        this.duracion = new SimpleIntegerProperty(duracion);
+        this.fechaPublicacion = new SimpleObjectProperty<>(fechaPublicacion);
     }
     //Getters Normales :)
     public String getId() {
@@ -34,11 +31,11 @@ public class Pelicula {
     public String getDirector() {
         return this.director.get();
     }
-    public Double getDuracion() {
+    public Integer getDuracion() {
         return this.duracion.get();
     }
     public LocalDate getFechaPublicacion() {
-        return LocalDate.parse(this.fechaPublicacion.get(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return fechaPublicacion.get();
     }
 
     //Getters Properties
@@ -51,17 +48,17 @@ public class Pelicula {
     public StringProperty directorProperty() {
         return this.director;
     }
-    public DoubleProperty duracionProperty() {
+    public IntegerProperty duracionProperty() {
         return this.duracion;
     }
-    public StringProperty fechaPublicacionProperty() {
+    public ObjectProperty<LocalDate> fechaPublicacionProperty() {
         return this.fechaPublicacion;
     }
 
     public void setNombre(String nombre) {
         this.nombre.set(nombre);
     }
-    public void setFechaPublicacion(String fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion.set(fechaPublicacion);
     }
 
