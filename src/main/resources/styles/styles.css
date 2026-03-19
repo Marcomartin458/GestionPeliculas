@@ -1,0 +1,86 @@
+/* --- ESTILOS GENERALES --- */
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: #f4f6f8;
+    -fx-font-size: 14px;
+    -fx-padding: 20px;
+}
+
+/* --- TEXTOS Y TÍTULOS --- */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 0 0 15 0;
+}
+
+.label {
+    -fx-text-fill: #34495e;
+}
+
+/* --- CAMPOS DE TEXTO (TextField y PasswordField) --- */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 12px;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 2px;
+}
+
+/* --- BOTONES --- */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.button:pressed {
+    -fx-background-color: #1c5980;
+}
+
+/* Botón de peligro (para Eliminar o Cerrar sesión) */
+#btnEliminar, #btnCerrar {
+    -fx-background-color: #e74c3c;
+}
+
+#btnEliminar:hover, #btnCerrar:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* --- TABLA DE PELÍCULAS --- */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #ecf0f1;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9; 
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}

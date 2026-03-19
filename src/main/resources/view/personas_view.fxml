@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15"
+      alignment="CENTER"
+      stylesheets="/styles/styles.css"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dam.code.controller.PersonasController">
+
+    <Label text="Registro de Usuario" styleClass="title"/>
+
+    <TextField fx:id="txtNombre" promptText="Nombre" />
+    <TextField fx:id="txtApellido" promptText="Apellido" />
+    <TextField fx:id="txtDni" promptText="DNI" />
+    <TextField fx:id="txtEmail" promptText="Email" />
+    <PasswordField fx:id="txtPassword" promptText="Contraseña" />
+    <PasswordField fx:id="txtRepetir" promptText="Repetir Contraseña" />
+
+    <Button fx:id="btnRegistro" text="Registrar" onAction="#registrarUsuario"/>
+    <Button fx:id="btnInicio" text="Ir a Iniciar Sesión" onAction="#cambiarVentana"/>
+
+    <Label fx:id="lblMensaje" styleClass="label"/>
+
+</VBox>
