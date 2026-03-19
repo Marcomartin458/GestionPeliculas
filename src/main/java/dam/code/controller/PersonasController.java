@@ -146,7 +146,7 @@ public class PersonasController {
 
                     txtNombre.getScene().setRoot(root);
 
-                } catch (PersonaExcepcion e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     mostrarAlertErrorValidacion("Error al cambiar a la vista de peliculas");
                 }
