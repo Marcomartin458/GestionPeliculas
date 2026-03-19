@@ -38,7 +38,7 @@ public class PersonaService {
         return null;
     }
 
-    public static void registroValido(String dni) throws PersonaExcepcion {
+    public void registroValido(String dni) throws PersonaExcepcion {
         String regex = "^[0-9]{8}[A-Z]{1}$";
         if (!dni.matches(regex)) {
             throw new PersonaExcepcion("DNI no válido. Debe tener 8 números y una letra. Ejemplo válido: 12345678A");
