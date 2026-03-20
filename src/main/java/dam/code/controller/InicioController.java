@@ -18,6 +18,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
+/**
+ * Controlador para la vista de Inicio de Sesión.
+ *
+ * @author Alumno- Marco Martin
+ * @version 1.0
+ */
 public class InicioController {
 
     @FXML
@@ -34,9 +40,12 @@ public class InicioController {
 
     private PersonaService personaService = new PersonaService(new UsuariosDAO());
 
-
     private Persona usuarioRegistrado;
 
+    /**
+     * Metodo que valida los datos introducidos y permite el acceso al sistema.
+     * En caso de error, muestra una alerta al usuario.
+     */
     @FXML
     public void iniciarSesion() {
         String dni = txtdni.getText();
@@ -63,6 +72,9 @@ public class InicioController {
         }
     }
 
+    /**
+     * Metodo que cambia hacia la ventana de Registro de Usuarios.
+     */
     @FXML
     public void cambiarVentana() {
         try {
@@ -78,6 +90,11 @@ public class InicioController {
         }
     }
 
+    /**
+     * Metodo que muestra un cuadro de diálogo de error con un mensaje específico.
+     *
+     * @param mensaje el texto del error
+     */
     private void mostrarAlertErrorValidacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error de validación");
@@ -86,6 +103,10 @@ public class InicioController {
         alert.showAndWait();
     }
 
+    /**
+     * Metodo que muestra un cuadro de diálogo de confirmación tras un inicio de sesión exitoso.
+     * Si el usuario acepta, carga la vista de la cartelera de películas.
+     */
     private void mostrarAlertConfirm() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Inicio exitoso");

@@ -12,20 +12,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Servicio que gestiona la lógica de negocio de las películas.
+ * Controla validaciones, almacenamiento y la lista observable de la interfaz.
+ *
+ * @author Alumno- Marco Martin
+ * @version 1.0
+ */
 public class PeliculaService {
     private final ObservableList<Pelicula> peliculas;
     private final PeliculaRepository repository;
     private final Map<PeliculaDTO, Integer> visualizaciones;
 
+    /**
+     * Constructor del servicio.
+     * Carga el historial de visualizaciones y prepara la lista para JavaFX.
+     *
+     * @param repository el repositorio de almacenamiento de películas
+     */
     public PeliculaService(PeliculaRepository repository) {
         this.repository = repository;
         visualizaciones = repository.cargar();
         peliculas = FXCollections.observableArrayList(cargar());
     }
 
+    /**
+     * Getter de la lista observable de películas
+     *
+     * @return la lista observable enlazada a la tabla
+     */
     public ObservableList<Pelicula> getPeliculas() {
         return peliculas;
     }
+
+    /**
+     * Convierte el mapa de DTOs guardados a una lista de modelos Pelicula.
+     *
+     * @return la lista de películas inicial
+     */
     private List<Pelicula> cargar() {
         List<Pelicula> listaPeliculas=new ArrayList<>();
 
@@ -36,10 +60,20 @@ public class PeliculaService {
         }
         return listaPeliculas;
     }
+
+    /**
+     * Guarda el estado actual del mapa de visualizaciones.
+     */
     private void guardar(){
         repository.guardar(visualizaciones);
     }
 
+    /**
+     * Valida y añade una nueva película al sistema.
+     *
+     * @param pelicula la película a añadir
+     * @throws PeliculaExcepcion si los datos no cumplen los requisitos o la película ya existe
+     */
     public void agregarPelicula(Pelicula pelicula) throws PeliculaExcepcion {
         validarPelicula(pelicula);
         peliculas.add(pelicula);
@@ -47,6 +81,12 @@ public class PeliculaService {
         guardar();
     }
 
+    /**
+     * Comprueba que todos los campos de la película son correctos y válidos.
+     *
+     * @param pelicula la película a analizar
+     * @throws PeliculaExcepcion con el mensaje de error específico si falla alguna regla
+     */
     private void validarPelicula(Pelicula pelicula) throws PeliculaExcepcion {
         String regex="^[a-zA-Z]{3}[0-9]{2}$";
         if(!pelicula.getId().matches(regex) || pelicula.getId().isEmpty()){
@@ -69,8 +109,13 @@ public class PeliculaService {
         if (existe){
             throw new PeliculaExcepcion("La película introducida ya existe en el sistema, puedes visualizarla sin tener que añadirla!");
         }
-
     }
+
+    /**
+     * Suma una visualización al contador de la película especificada.
+     *
+     * @param pelicula la película que ha sido visualizada
+     */
     public void registrarVisualizacion(Pelicula pelicula) {
         if (pelicula != null) {
             PeliculaDTO dto = pelicula.toDTO();
@@ -83,6 +128,13 @@ public class PeliculaService {
             guardar();
         }
     }
+
+    /**
+     * Borra permanentemente una película del registro y de la vista.
+     *
+     * @param pelicula la película a eliminar
+     * @throws PeliculaExcepcion si no se ha seleccionado ninguna película
+     */
     public void eliminarPelicula(Pelicula pelicula) throws PeliculaExcepcion {
         if (pelicula == null){
             throw new PeliculaExcepcion("Debes seleccionar una película");
@@ -92,6 +144,13 @@ public class PeliculaService {
         guardar();
     }
 
+    /**
+     * Modifica el nombre de una película existente conservando su número de visualizaciones.
+     *
+     * @param pelicula la película a modificar
+     * @param nuevoNombre el nuevo título a asignar
+     * @throws PeliculaExcepcion si el nombre está vacío o es nulo
+     */
     public void actualizarNombre (Pelicula pelicula, String nuevoNombre) throws PeliculaExcepcion {
         if (nuevoNombre==null || nuevoNombre.isEmpty()){
             throw new PeliculaExcepcion("El nombre es obligatorio");
@@ -104,6 +163,13 @@ public class PeliculaService {
         guardar();
     }
 
+    /**
+     * Modifica la fecha de estreno de una película conservando su historial de visualizaciones.
+     *
+     * @param pelicula la película a modificar
+     * @param nuevoFechaPublicacion la nueva fecha asignada
+     * @throws PeliculaExcepcion si la fecha es posterior al día de hoy
+     */
     public void actualizarFechaPublicacion(Pelicula pelicula, LocalDate nuevoFechaPublicacion) throws PeliculaExcepcion {
         if (nuevoFechaPublicacion.isAfter(LocalDate.now())) {
             throw new PeliculaExcepcion("La fecha publicacion no puede ser superior a la de hoy");
@@ -115,5 +181,4 @@ public class PeliculaService {
         visualizaciones.put(pelicula.toDTO(), visualizacion);
         guardar();
     }
-
 }

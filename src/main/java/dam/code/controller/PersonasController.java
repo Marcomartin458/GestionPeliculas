@@ -17,8 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.awt.*;
-
+/**
+ * Controlador para la vista de registro de usuarios.
+ *
+ * @author Alumno- Marco Martin
+ * @version 1.0
+ */
 public class PersonasController {
     @FXML
     private TextField txtNombre;
@@ -39,12 +43,20 @@ public class PersonasController {
     @FXML
     private Label lblMensaje;
 
+    private final PersonaService personaService = new PersonaService(new UsuariosDAO());
 
-
+    /**
+     * Metodo que establece un mensaje de bienvenida
+     *
+     * @param mensajeBienvenida el texto a mostrar
+     */
     public void setMensajeBienvenida(String mensajeBienvenida) {
         lblMensaje.setText(mensajeBienvenida);
     }
 
+    /**
+     * Metodo que valida los campos del formulario y registra al nuevo usuario
+     */
     @FXML
     public void registrarUsuario() {
         String nombre = txtNombre.getText();
@@ -65,9 +77,7 @@ public class PersonasController {
             return;
         }
 
-
         try {
-            PersonaService personaService = new PersonaService(new UsuariosDAO());
             Persona persona=new Persona(dni,nombre,apellido,email);
             personaService.addUsuario(persona,password);
 
@@ -75,12 +85,14 @@ public class PersonasController {
             lblMensaje.setStyle("-fx-text-fill: lightgreen");
             mostrarAlertConfirm();
 
-
         } catch (PersonaExcepcion e) {
             mostrarAlertErrorValidacion(e.getMessage());
         }
     }
 
+    /**
+     * Metodo que cambia hacia la ventana de Inicio de Sesión
+     */
     @FXML
     public void cambiarVentana() {
         PersonaService personaService = new PersonaService(new UsuariosDAO());
@@ -98,7 +110,6 @@ public class PersonasController {
 
             Parent root = fxmlLoader.load();
 
-
             Stage stage = (Stage) btnInicio.getScene().getWindow();
 
             Scene scene = new Scene(root, 600, 650);
@@ -110,6 +121,12 @@ public class PersonasController {
             mostrarAlertErrorValidacion("Error al cargar la pantalla de inicio de sesión.");
         }
     }
+
+    /**
+     * Metodo que muestra una ventana emergente con un mensaje de error
+     *
+     * @param mensaje el texto del error
+     */
     private void mostrarAlertErrorValidacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error de validacion");
@@ -119,6 +136,9 @@ public class PersonasController {
         alert.showAndWait();
     }
 
+    /**
+     * Muestra una confirmación para acceder a la cartelera tras registrarse
+     */
     private void mostrarAlertConfirm() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
@@ -142,7 +162,6 @@ public class PersonasController {
                     PeliculaRepository repository = new JsonManager(dni);
                     PeliculaService service = new PeliculaService(repository);
                     peliculaController.setPeliculaService(service);
-
 
                     txtNombre.getScene().setRoot(root);
 
