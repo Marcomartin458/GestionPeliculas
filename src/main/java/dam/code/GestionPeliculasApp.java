@@ -36,15 +36,16 @@ public class GestionPeliculasApp extends Application {
             stage.setTitle("Peliculas");
 
             stage.show();
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/inicio_view.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root, 600, 650);
+            stage.setScene(scene);
+            stage.setTitle("Peliculas");
+
+            stage.show();
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/inicio_view.fxml"));
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root, 600, 650);
-        stage.setScene(scene);
-        stage.setTitle("Peliculas");
-
-        stage.show();
     }
 
     /**
