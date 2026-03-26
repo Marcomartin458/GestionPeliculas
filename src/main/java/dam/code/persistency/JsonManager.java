@@ -72,7 +72,7 @@ public class JsonManager implements PeliculaRepository {
      */
     @Override
     public void guardar(Map<PeliculaDTO, Integer> visualizaciones) {
-        try(Writer writer=new FileWriter(archivo)){
+        try(FileWriter writer=new FileWriter(archivo)){
             gson.toJson(visualizaciones, writer);
 
         }catch(Exception e){
